@@ -10,7 +10,7 @@ class Event {
     public:
         Event(callback_t callback) : callback(callback) { }
 
-        void run() {
+        virtual void run() {
             callback();
         }
 
@@ -18,5 +18,7 @@ class Event {
 
         virtual void startTracking();
         virtual void stopTracking();
+        virtual bool needRemove();
         
+        virtual ~Event() {}
 };

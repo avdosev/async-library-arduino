@@ -17,9 +17,15 @@ class EventLoop {
         void exec() {
             runing = true;
             while (runing) {
-                auto event = getReadyEvent();
+                auto event_pair = getReadyEvent();
+                auto event = event_pair.second;
+                event->stopTracking();
                 event->run();
-                event->startTracking();
+                if (event->needRemove()) {
+                    removeEvent(event_pair.first);
+                } else {
+                    event->startTracking();
+                }
             }
         }
 
@@ -27,10 +33,10 @@ class EventLoop {
             runing = false;
         }
 
-        event_t getReadyEvent() {
+        std::pair<event_id_t, event_t> getReadyEvent() {
             for (auto map_item : events) {
                 event_t item = map_item.second;
-                if (item->isReady()) return item;
+                if (item->isReady()) return map_item;
             }
         }
 
