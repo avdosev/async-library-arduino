@@ -3,10 +3,8 @@
 class Event {
     public:
         using callback_t = std::function<void(void)>;
-    private:
-        callback_t callback;
     protected:
-        
+        callback_t callback;
     public:
         Event(callback_t callback) : callback(callback) { }
 
