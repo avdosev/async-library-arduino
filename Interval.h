@@ -1,5 +1,6 @@
+#pragma once
+
 #include "event.h"
-// #include <Arduino.h>
 
 class Interval : public Event {
     private: 
