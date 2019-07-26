@@ -20,51 +20,51 @@ class:
 пример с интервалами
 
 ~~~c++
-#include <iostream>
-#include <ctime>
+#include <ctime> // это необходимо только в качестве примера
 
 #include "event_loop.h"
 #include "interval.h"
 
-using namespace std;
+// функция тикер, для проверки временных промежутков Интервала и Таймера
+uint32_t tiker() {
+    return time(0);
+}
 
-int main () {
-    srand(time(0));
-    EventLoop loop([]() {
-        return rand();
-    });
+void setup() {
+    Serial.begin(115200);
+
+    // создаем события интервала
     
     int counter = 0;
     EventLoop::event_t new_event1((Event*) new Interval([&loop, &counter](){
-        cout << "interval 1" << endl;
+        Serial.println("interval 1");
         counter++;
         if (counter >= 2) {
-            loop.stop();
+            loop.stop(); // останавливаем цикл событий
         }
-    }, 3, []() -> uint32_t {
-        return time(0);
-    }));
+    }, 3, tiker));
     
     EventLoop::event_t new_event2 ((Event*) new Interval([](){
-        cout << "interval 2" << endl;
-    }, 1, []() -> uint32_t {
-        return time(0);
-    }));
+        Serial.println("interval 2");
+    }, 1, tiker));
     
     EventLoop::event_t new_event3 ((Event*) new Interval([](){
-        cout << "interval 3" << endl;
-    }, 2, []() -> uint32_t {
-        return time(0);
-    }));
+        Serial.println("interval 3");
+    }, 2, tiker));
     
+    EventLoop loop;
+    
+    // добавляем события
     loop.addEvent(new_event1);
     loop.addEvent(new_event2);
     loop.addEvent(new_event3);
     
-    loop.exec();
+    loop.exec(); // запускаем цикл событий
     
     return 0;
 }
+
+void loop() { }
 
 ~~~
 Вывод: \
