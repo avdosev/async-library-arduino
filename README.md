@@ -61,7 +61,6 @@ void setup() {
     
     loop.exec(); // запускаем цикл событий
     
-    return 0;
 }
 
 void loop() { }
