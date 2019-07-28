@@ -1,16 +1,8 @@
 #pragma once
 
-#include <functional>
-#include <memory>
-
-class Event;
-
-using event_id_t = uint32_t;
-using event_t = std::shared_ptr<Event>;
+#include "event_define.h"
 
 class Event {
-    public:
-        using callback_t = std::function<void(void)>;
     protected:
         callback_t callback;
     public:
