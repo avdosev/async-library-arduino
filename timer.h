@@ -1,7 +1,7 @@
 #pragma once
 
 #include "event.h"
-// #include <Arduino.h>
+#include "event_define.h"
 
 class Timer : public Event {
     private: 
@@ -9,9 +9,9 @@ class Timer : public Event {
         uint32_t interval;
         bool state;
         bool need_remove;
-        std::function<uint32_t(void)> tiker; // функция для проверки времени
+        tiker_t tiker; // функция для проверки времени
     public:
-        Timer(Event::callback_t callback, uint32_t interval, std::function<uint32_t(void)> time_cheker) :
+        Timer(callback_t callback, uint32_t interval, tiker_t time_cheker) :
             Event(callback),
             interval(interval),
             tiker(time_cheker),

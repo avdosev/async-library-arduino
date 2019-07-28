@@ -1,15 +1,16 @@
 #pragma once
 
 #include "event.h"
+#include "event_define.h"
 
 class Interval : public Event {
     private: 
         uint32_t interval_start;
         uint32_t interval;
         bool state;
-        std::function<uint32_t(void)> tiker; // функция для проверки времени
+        tiker_t tiker; // функция для проверки времени
     public:
-        Interval(Event::callback_t callback, uint32_t interval, std::function<uint32_t(void)> time_cheker) :
+        Interval(callback_t callback, uint32_t interval, tiker_t time_cheker) :
             Event(callback),
             interval(interval),
             tiker(time_cheker) 

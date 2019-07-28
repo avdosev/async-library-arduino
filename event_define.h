@@ -13,6 +13,7 @@ class Event;
 using event_id_t = uint32_t;
 using event_t = dependence::shared_ptr<Event>;
 using callback_t = dependence::function<void(void)>;
+using tiker_t = dependence::function<uint32_t(void)>;
 
 // std::pair<event_id_t, event_t>
 using event_pair = struct {
