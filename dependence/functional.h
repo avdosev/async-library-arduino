@@ -9,6 +9,9 @@ Original https://github.com/prograholic/blog/blob/master/cxx_function/main.cpp
 
 namespace dependence
 {
+	template <typename UnusedType>
+    class function;
+	
     template <typename ReturnType, typename ...ArgumentTypes>
     class function <ReturnType (ArgumentTypes ...)> {
         public:
@@ -56,14 +59,14 @@ namespace dependence
 
                     virtual ReturnType invoke(ArgumentTypes ... args) = 0;
 
-                    virtual unique_ptr<function_holder_base> clone() = 0;
+                    virtual shared_ptr<function_holder_base> clone() = 0;
 
                 private:
                     function_holder_base(const function_holder_base & );
                     void operator = (const function_holder_base &);
             };
 
-            using invoker_t = unique_ptr<function_holder_base>;
+            using invoker_t = shared_ptr<function_holder_base>;
 
             template <typename functionT>
             class free_function_holder : public function_holder_base {

@@ -114,7 +114,7 @@ class SharedPtr {
 			swap(this->node, other->node);
 		}
 		
-		pointer get() {
+		pointer get() const {
 			return node->value;
 		}
 		
@@ -138,11 +138,11 @@ class SharedPtr {
 			return node->value != NULL;
 		}
 		
-		type& operator * () {
+		type& operator * () const {
 			return *get();
 		}
 		
-		pointer operator -> () {
+		pointer operator -> () const {
 			return get();
 		}
 };
