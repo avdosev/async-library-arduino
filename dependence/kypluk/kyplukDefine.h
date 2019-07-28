@@ -2,8 +2,8 @@
 //polubasu eto yze est v qt(
 #pragma once
 
-#include <kyplukSyntacticSugar.h>
-#include <kyplukTypedef.h>
+#include "kyplukSyntacticSugar.h"
+#include "kyplukTypedef.h"
 
 #define USE(chtoto) using namespace chtoto;
 

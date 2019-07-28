@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kyplukDefine.h>
+#include "kyplukDefine.h"
 
 namespace kypluk {
 

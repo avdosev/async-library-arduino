@@ -1,13 +1,12 @@
 #pragma once
 
-#include <utility>
 #include <stdlib.h>
 
+#include "event_define.h"
 #include "event.h"
 
 class EventPool {
     private:
-        using event_pair = std::pair<event_id_t, event_t>;
         size_t size, max_size;
         event_pair* events;
     public:
@@ -41,12 +40,12 @@ class EventPool {
             return false;
         }
 
-        std::pair<event_id_t, event_t> getReadyEvent() {
+        event_pair getReadyEvent() {
             for (auto map_item : *this) {
                 event_t item = map_item.second;
                 if (item->isReady()) return map_item;
             }
-            return event_pair(0, nullptr);
+            return event_pair{0, nullptr};
         }
 
         event_t getEvent(event_id_t id) {
@@ -54,7 +53,7 @@ class EventPool {
 
         event_id_t addEvent(event_t event) {
             event_id_t id = generateUniqueEventId();
-            this->insert(std::make_pair(id, event));
+            this->insert(event_pair{id, event});
             event->startTracking();
             return id;
         }
