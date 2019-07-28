@@ -25,7 +25,7 @@ class:
 
 // функция тикер, для проверки временных промежутков Интервала и Таймера
 uint32_t tiker() {
-    return time(0);
+    return millis();
 }
 
 EventLoop event_loop;

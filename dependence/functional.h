@@ -56,7 +56,7 @@ namespace dependence
 
                     virtual ReturnType invoke(ArgumentTypes ... args) = 0;
 
-                    virtual std::auto_ptr<function_holder_base> clone() = 0;
+                    virtual unique_ptr<function_holder_base> clone() = 0;
 
                 private:
                     function_holder_base(const function_holder_base & );
