@@ -102,11 +102,13 @@ void setup() {
     // создаем события интервала
     
     int counter = 0;
-    event_t new_event((Event*) new Interval([&event_loop, &counter](){
+
+    // добавляем события
+    event_loop.addEvent( makeInterval([&event_loop, &counter](){
         Serial.print("interval "),
         Serial.println(counter);
         
-        event_loop.addEvent((Event*) new Timer([counter, &event_loop](){
+        event_loop.addEvent(makeTimer([counter, &event_loop](){
             Serial.print("timeout after interval with counter - ");
             Serial.println(counter);
             if (counter >= 5) event_loop.stop();
@@ -114,10 +116,7 @@ void setup() {
 
         counter++;
 
-    }, 3000, tiker)); // 3 секунды
-    
-    // добавляем события
-    event_loop.addEvent(new_event);
+    }, 3000, tiker) ); // интервал в 3 секунды
     
     event_loop.exec(); // запускаем цикл событий
 

@@ -44,3 +44,7 @@ class Interval : public Event {
         virtual ~Interval() {}
 
 };
+
+event_t makeInterval(callback_t callback, uint32_t interval, tiker_t time_cheker) {
+    return (Event*) new Interval(callback, interval, time_cheker);
+}
