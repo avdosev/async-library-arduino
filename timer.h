@@ -5,6 +5,7 @@
 
 class Timer : public Event {
     private: 
+        callback_t callback;
         uint32_t interval_start;
         uint32_t interval;
         bool state;
@@ -12,7 +13,7 @@ class Timer : public Event {
         tiker_t tiker; // функция для проверки времени
     public:
         Timer(callback_t callback, uint32_t interval, tiker_t time_cheker) :
-            Event(callback),
+            callback(callback),
             interval(interval),
             tiker(time_cheker),
             need_remove(false)

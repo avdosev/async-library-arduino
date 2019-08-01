@@ -4,14 +4,15 @@
 #include "event_define.h"
 
 class Interval : public Event {
-    private: 
+    private:
+        callback_t callback; 
         uint32_t interval_start;
         uint32_t interval;
         bool state;
         tiker_t tiker; // функция для проверки времени
     public:
         Interval(callback_t callback, uint32_t interval, tiker_t time_cheker) :
-            Event(callback),
+            callback(callback),
             interval(interval),
             tiker(time_cheker) 
         {
@@ -39,6 +40,10 @@ class Interval : public Event {
 
         bool needRemove() {
             return false;
+        }
+
+        void run() {
+            callback();
         }
 
         virtual ~Interval() {}
