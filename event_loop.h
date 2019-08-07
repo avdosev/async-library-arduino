@@ -14,16 +14,20 @@ class EventLoop {
         void exec() {
             runing = true;
             while (runing) {
-                if (events.hasReadyEvent()) {
-                    auto event_pair = events.getReadyEvent();
-                    auto event = event_pair.second;
-                    event->stopTracking();
-                    event->run();
-                    if (event->needRemove()) {
-                        events.removeEvent(event_pair.first);
-                    } else {
-                        event->startTracking();
-                    }
+                this->runNext();
+            }
+        }
+
+        void runNext() {
+            if (events.hasReadyEvent()) {
+                auto event_pair = events.getReadyEvent();
+                auto event = event_pair.second;
+                event->stopTracking();
+                event->run();
+                if (event->needRemove()) {
+                    events.removeEvent(event_pair.first);
+                } else {
+                    event->startTracking();
                 }
             }
         }
