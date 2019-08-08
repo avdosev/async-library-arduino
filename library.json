@@ -1,0 +1,19 @@
+{
+    "name": "async-library-arduino",
+    "keywords": "arduino, library, async, event loop, timer, timing, control, events",
+    "description": "Elegant event loop for working with timers, intervals and other events",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/avdosev/async-library-arduino.git"
+    },
+    "version": "1.0.1",
+    "authors": {
+      "name": "Avdosev N.",
+      "url": "https://github.com/avdosev"
+    },
+    "exclude": [
+      "dependence"
+    ],
+    "frameworks": "arduino",
+    "platforms": "*"
+}
