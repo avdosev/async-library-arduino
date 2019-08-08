@@ -1,5 +1,5 @@
 {
-    "name": "async_library_arduino",
+    "name": "async-library-arduino",
     "keywords": "arduino, library, async, event loop, timer, timing, control, events",
     "description": "Elegant event loop for working with timers, intervals and other events",
     "repository": {
