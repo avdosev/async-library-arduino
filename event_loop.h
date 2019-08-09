@@ -6,14 +6,14 @@
 class EventLoop {
     private:
         EventPool events;
-        bool runing;
+        bool _running = true;
     public:
         EventLoop() { }
         ~EventLoop() { }
 
         void exec() {
-            runing = true;
-            while (runing) {
+            _running = true;
+            while (_running) {
                 this->runNext();
             }
         }
@@ -41,6 +41,14 @@ class EventLoop {
         }
 
         void stop() {
-            runing = false;
+            _running = false;
+        }
+
+        bool isRunning() const {
+            return _running;
+        }
+        
+        bool isFinished() const {
+            return !isRunning();
         }
 };
