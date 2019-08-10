@@ -41,7 +41,7 @@ class EventLoop {
         }
 
         event_t getEvent(event_id_t id) {
-            events.getEvent(id);
+            return events.getEvent(id);
         }
 
         void stop() {
