@@ -40,6 +40,10 @@ class EventLoop {
             events.removeEvent(id);
         }
 
+        event_t getEvent(event_id_t id) {
+            events.getEvent(id);
+        }
+
         void stop() {
             _running = false;
         }

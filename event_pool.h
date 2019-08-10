@@ -49,6 +49,13 @@ class EventPool {
         }
 
         event_t getEvent(event_id_t id) {
+            auto it = this->find(id);
+            if (it != this->end()) {
+                return it->second;
+            } else {
+                return event_t(nullptr);
+            }
+            
         }
 
         event_id_t addEvent(event_t event) {
@@ -87,7 +94,7 @@ class EventPool {
             return this->end();
         }
 
-        event_pair* insert(event_pair pr) {
+        void insert(event_pair pr) {
             if (size == max_size) {
                 max_size = (max_size+1) * 2;
                 auto c_events = new event_pair[max_size];

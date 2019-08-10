@@ -13,3 +13,8 @@ class Event {
         
         virtual ~Event() {}
 };
+
+template<class type, typename... args_t>
+event_t makeEvent(args_t ...args) {
+  return (Event*) new type(args...);
+}

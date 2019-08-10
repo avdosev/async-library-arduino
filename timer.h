@@ -57,5 +57,5 @@ class Timer : public Event {
 };
 
 event_t makeTimer(callback_t callback, uint32_t interval, tiker_t time_cheker) {
-    return (Event*) new Timer(callback, interval, time_cheker);
+    return makeEvent<Timer>(callback, interval, time_cheker);
 }

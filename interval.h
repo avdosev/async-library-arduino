@@ -51,5 +51,5 @@ class Interval : public Event {
 };
 
 event_t makeInterval(callback_t callback, uint32_t interval, tiker_t time_cheker) {
-    return (Event*) new Interval(callback, interval, time_cheker);
+    return makeEvent<Interval>(callback, interval, time_cheker);
 }
