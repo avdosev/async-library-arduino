@@ -197,10 +197,10 @@ void setup() {
 
     // создаем события интервала
     
-    int counter = 0;
 
     // добавляем события
-    setInterval([&counter](){
+    setInterval([](){
+        static int counter = 0;
         Serial.print("interval "),
         Serial.println(counter);
         
@@ -211,7 +211,6 @@ void setup() {
         }, 1500); // 1,5 секунды
 
         counter++;
-
     }, 3000); // интервал в 3 секунды
     
     event_loop.exec(); // запускаем цикл событий
