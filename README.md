@@ -208,11 +208,11 @@ void setup() {
             Serial.print("timeout after interval with counter - ");
             Serial.println(counter);
             if (counter >= 5) event_loop.stop();
-        }, 1500)); // 1,5 секунды
+        }, 1500); // 1,5 секунды
 
         counter++;
 
-    }, 3000, tiker) ); // интервал в 3 секунды
+    }, 3000); // интервал в 3 секунды
     
     event_loop.exec(); // запускаем цикл событий
 }
