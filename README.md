@@ -174,7 +174,7 @@ void function_name(void) {
 
 ### Хочу синтаксис как на JavaScript
 
-```
+```c++
 EventLoop event_loop;
 
 void setInterval(callback_t callback, uint32_t time) {
@@ -191,7 +191,7 @@ Profit!!!
 
 используется также как и в js
 
-```
+```c++
 void setup() {
     Serial.begin(115200);
 
