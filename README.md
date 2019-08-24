@@ -172,6 +172,54 @@ void function_name(void) {
 
 `tiker_t` - функция, функтор и лямбда не принимающая значений и возвращающая uint32_t
 
+### Хочу синтаксис как на JavaScript
+
+```
+EventLoop event_loop;
+
+void setInterval(callback_t callback, uint32_t time) {
+    event_loop.addEvent(makeInterval(callback, time, millis));
+}
+
+void setTimeout(callback_t callback, uint32_t time) {
+    event_loop.addEvent(makeTimer(callback, time, millis));
+}
+```
+
+??? \
+Profit!!!
+
+используется также как и в js
+
+```
+void setup() {
+    Serial.begin(115200);
+
+    // создаем события интервала
+    
+    int counter = 0;
+
+    // добавляем события
+    setInterval([&counter](){
+        Serial.print("interval "),
+        Serial.println(counter);
+        
+        setTimeout([counter](){
+            Serial.print("timeout after interval with counter - ");
+            Serial.println(counter);
+            if (counter >= 5) event_loop.stop();
+        }, 1500)); // 1,5 секунды
+
+        counter++;
+
+    }, 3000, tiker) ); // интервал в 3 секунды
+    
+    event_loop.exec(); // запускаем цикл событий
+}
+
+void loop() { }
+```
+
 ## Event`s и расширение событий
 
 ```c++
