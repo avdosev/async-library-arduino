@@ -195,9 +195,6 @@ Profit!!!
 void setup() {
     Serial.begin(115200);
 
-    // создаем события интервала
-    
-
     // добавляем события
     setInterval([](){
         static int counter = 0;
