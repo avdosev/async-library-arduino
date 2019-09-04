@@ -55,4 +55,13 @@ class EventLoop {
         bool isFinished() const {
             return !isRunning();
         }
+
+        void sleep(uint32_t time_to_sleep, tiker_t time_cheker) {
+            uint32_t start = time_cheker();
+            uint32_t current;
+            do {
+                runNext();
+                current = time_cheker();
+            } while(isRunning() && (current-start >= time_to_sleep));
+        }
 };
