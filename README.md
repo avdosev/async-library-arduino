@@ -68,7 +68,7 @@ void loop() { }
 
 ~~~
 Вывод: \
-(на разных устройствах может немного отличаться)
+(порядок может немного отличаться в зависимости от реализации пула евентов)
 ~~~
 interval 2
 interval 3
@@ -104,7 +104,7 @@ void setup() {
     int counter = 0;
 
     // добавляем события
-    event_loop.addEvent( makeInterval([&event_loop, &counter](){
+    event_loop.addEvent(makeInterval([&event_loop, &counter](){
         Serial.print("interval "),
         Serial.println(counter);
         
@@ -220,17 +220,9 @@ void loop() { }
 
 ```c++
 class Event {
-    protected:
-        callback_t callback;
     public:
-        Event(callback_t callback) : callback(callback) { }
-
-        virtual void run() {
-            callback();
-        }
-
+        virtual void run() = 0;
         virtual bool isReady() = 0;
-
         virtual void startTracking() = 0;
         virtual void stopTracking() = 0;
         virtual bool needRemove() = 0;

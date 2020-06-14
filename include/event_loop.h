@@ -6,20 +6,20 @@
 class EventLoop {
     private:
         EventPool events;
-        bool _running = true;
+        volatile bool _running = true;
     public:
-        EventLoop() { }
+        EventLoop() = default;
         ~EventLoop() { }
 
         void exec() {
-            _running = true;
-            while (_running) {
+            this->activate();
+            while (isRunning()) {
                 this->runNext();
             }
         }
 
         void runNext() {
-            if (events.hasReadyEvent()) {
+            if (isRunning() && events.hasReadyEvent()) {
                 auto event_pair = events.getReadyEvent();
                 auto event = event_pair.second;
                 event->stopTracking();
@@ -42,6 +42,10 @@ class EventLoop {
 
         event_t getEvent(event_id_t id) {
             return events.getEvent(id);
+        }
+
+        void activate() {
+            _running = true;
         }
 
         void stop() {

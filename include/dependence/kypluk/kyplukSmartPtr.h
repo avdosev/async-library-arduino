@@ -1,7 +1,5 @@
 #pragma once
 
-#include "kyplukDefine.h"
-
 namespace kypluk {
 
 template <class type>
@@ -12,7 +10,7 @@ class UniquePtr {
         UniquePtr(const UniquePtr&) {}
         void operator = (const UniquePtr&) {}
 	public:
-		UniquePtr(pointer ptr = NULL) {
+		UniquePtr(pointer ptr = nullptr) {
 			this->ptr = ptr;
 		}
 		~UniquePtr() {
@@ -21,17 +19,17 @@ class UniquePtr {
 		
 		pointer release() {
 			pointer temp = ptr;
-			ptr = NULL;
+			ptr = nullptr;
 			return temp;
 		} 
-		void reset(pointer ptr = NULL) {
+		void reset(pointer ptr = nullptr) {
 			if (this->ptr) delete this->ptr;
 			this->ptr = ptr;
 		}
 		
 		void swap(UniquePtr &other) {
 			this->ptr = other.ptr;
-			other.ptr = NULL;
+			other.ptr = nullptr;
 		}
 		
 		pointer get() {
@@ -49,7 +47,7 @@ class UniquePtr {
 		}
 		
 		operator bool () {
-			return ptr != NULL;
+			return ptr != nullptr;
 		}
 		
 		type& operator * () {
@@ -72,14 +70,14 @@ class SharedPtr {
 		struct Node {
 			mutable Size_t size;
 			type* value;
-			Node(type *value = NULL) {
+			Node(type *value = nullptr) {
 				this->value = value;
 				size = 1; 
 			}
 		};
 		Node * node;
 	public:
-		SharedPtr(type *value = NULL) {
+		SharedPtr(type *value = nullptr) {
 			node = new Node(value);
 		}
 		
@@ -96,7 +94,7 @@ class SharedPtr {
 			}
 		}
 		 
-		void reset(pointer ptr = NULL) {	
+		void reset(pointer ptr = nullptr) {	
 			if (node->size == 1) {
 				if (node->value) delete node->value;
 				node->value = ptr;
@@ -135,7 +133,7 @@ class SharedPtr {
 		}
 		
 		operator bool () {
-			return node->value != NULL;
+			return node->value != nullptr;
 		}
 		
 		type& operator * () const {

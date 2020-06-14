@@ -2,34 +2,24 @@
 
 #include <stdlib.h>
 
-#include "event_define.h"
-#include "event.h"
+#include "interface/event_pool.h"
 
-class EventPool {
+class EventPool final : public IEventPool {
     private:
         size_t size, max_size;
         event_pair* events;
+
     public:
+        using iterator = event_pair*;
+
         EventPool() {
             size = 0; max_size = 10;
             events = new event_pair[max_size];
         }
 
-        ~EventPool() {
+        virtual ~EventPool() {
             delete[] events;
             events = nullptr;
-        }
-
-        event_id_t generateUniqueEventId() {
-            event_id_t id;
-            bool find;
-
-            do {
-                id = rand();
-                find = id == 0 && this->find(id) == this->end();
-            } while (find);
-
-            return id;
         }
 
         bool hasReadyEvent() {
@@ -77,15 +67,16 @@ class EventPool {
             }
         }
 
-        event_pair* begin() const{
+    private:
+        iterator begin() const{
             return events;
         }
 
-        event_pair* end() const {
+        iterator end() const {
             return events+size;
         }
 
-        event_pair* find(event_id_t id) {
+        iterator find(event_id_t id) const {
             for (auto it = this->begin(); it != this->end(); it++) {
                 event_t item = it->second;
                 if (item->isReady())
@@ -107,5 +98,18 @@ class EventPool {
 
             events[size] = pr;
             size++;
+        }
+
+    private:
+        event_id_t generateUniqueEventId() {
+            event_id_t id;
+            bool find;
+
+            do {
+                id = rand();
+                find = id == 0 && this->find(id) == this->end();
+            } while (find);
+
+            return id;
         }
 };
