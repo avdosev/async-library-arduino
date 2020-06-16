@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "interface/event_pool.h"
 
@@ -17,20 +17,19 @@ class EventPool final : public IEventPool {
             events = new event_pair[max_size];
         }
 
-        virtual ~EventPool() {
+        ~EventPool() override {
             delete[] events;
-            events = nullptr;
         }
 
-        bool hasReadyEvent() {
-            for (auto map_item : *this) {
+        bool hasReadyEvent() override {
+            for (auto& map_item : *this) {
                 event_t item = map_item.second;
                 if (item->isReady()) return true;
             }
             return false;
         }
 
-        event_pair getReadyEvent() {
+        event_pair getReadyEvent() override {
             for (auto map_item : *this) {
                 event_t item = map_item.second;
                 if (item->isReady()) return map_item;
@@ -38,7 +37,7 @@ class EventPool final : public IEventPool {
             return event_pair{0, nullptr};
         }
 
-        event_t getEvent(event_id_t id) {
+        event_t getEvent(event_id_t id) override {
             auto it = this->find(id);
             if (it != this->end()) {
                 return it->second;
@@ -48,14 +47,14 @@ class EventPool final : public IEventPool {
             
         }
 
-        event_id_t addEvent(event_t event) {
+        event_id_t addEvent(event_t event) override {
             event_id_t id = generateUniqueEventId();
             this->insert(event_pair{id, event});
             event->startTracking();
             return id;
         }
 
-        void removeEvent(event_id_t id) {
+        void removeEvent(event_id_t id) override {
             for (size_t i = 0; i < size; i++) {
                 if (events[i].first == id) {
                     for (size_t j = i; j < size-1; j++) {

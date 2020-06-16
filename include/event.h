@@ -11,7 +11,7 @@ class Event {
         virtual void stopTracking() = 0;
         virtual bool needRemove() = 0;
         
-        virtual ~Event() {}
+        virtual ~Event() = default;
 };
 
 template<class type, typename... args_t>
