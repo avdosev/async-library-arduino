@@ -13,6 +13,8 @@
   },
   "frameworks": "arduino",
   "platforms": "*",
-  "include": "include",
-  "examples": "examples/*.cpp"
+  "export": {
+    "include": "./include"
+  },
+  "examples": "./examples/*.cpp"
 }
