@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 using uint = unsigned;
 using llint = long long int;
